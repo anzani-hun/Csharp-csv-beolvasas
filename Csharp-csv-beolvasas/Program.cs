@@ -39,35 +39,33 @@ namespace Gyakrolas
                 }
             }
 
-            Console.WriteLine("Kérem a felhasználónevet: ");
-            string input_username = Console.ReadLine();
-            Console.WriteLine("Kérem a jelszót: ");
-            string input_password = Console.ReadLine();
+            Console.Write("Írd be a felhasználónevedet: ");
+            string inp_usr = Console.ReadLine();
+            Console.Write("Írd be a jelszavadat: ");
+            string inp_pass = Console.ReadLine();
 
-            //felhaszvizsgal = adatbázisban lévő username összehasonlítása a bevitt felhasználónévvel, hogy megegyezik-e
-            foreach (Felhasznalo felhaszvizsgal in felhasznalok)
-            { 
-                if (felhaszvizsgal.username == input_username)
-                {
-                    Console.WriteLine("A felhasználónév helyes!");
-                    continue;
-                }
-                else
-                {
-                    Console.WriteLine("Rossz felhasználónevet adtál meg!");
-                }
+            bool logged = false;
 
-                if (felhaszvizsgal.password == input_password)
+            
+            foreach (Felhasznalo fel in felhasznalok)
+            {
+                if (inp_usr == fel.username)
                 {
-                    Console.WriteLine("A jelszó helyes!");
-                    continue;
+                    if (inp_pass == fel.password)
+                    {
+                        Console.WriteLine("Sikeres bejelentkezés!");
+                        logged = true;
+                        break;
+                    }
+                    Console.WriteLine("Rossz jelszó!");
                 }
-                else
-                {
-                    Console.WriteLine("Rossz a jelszó!");
-                }
-                
             }
+
+            if (!logged)
+            {
+                Console.WriteLine("Sikertelen bejelentkezés!");
+            }
+
             Console.ReadKey();
         }
 
